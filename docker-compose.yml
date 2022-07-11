@@ -1,0 +1,64 @@
+version: "3.5"
+services:
+  micro-upload-files:
+    container_name: micro-upload-files
+    build:
+      context: "."
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - .:/var/www/html
+    ports:
+      - 8281:80
+    restart: unless-stopped
+    tty: true
+    dns:
+      - 8.8.8.8
+    environment:
+      # DB connection
+      DB_CONNECTION: ${DB_CONNECTION}
+      DB_PORT: 3306
+      DB_USERNAME: ${DB_USERNAME}
+      DB_HOST: db-micro-upload-files
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_DATABASE: ${DB_DATABASE}
+
+      # AWS Settings
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+      AWS_DEFAULT_REGION: ${AWS_DEFAULT_REGION}
+      AWS_BUCKET: ${AWS_BUCKET}
+      AWS_BUCKET_PUBLIC: ${AWS_BUCKET_PUBLIC}
+      AWS_URL_PUBLIC: ${AWS_URL_PUBLIC}
+      CLOUD_FRONT_PUBLIC: ${CLOUD_FRONT_PUBLIC}
+      
+      CACHE_TIME: 27800 #8h
+
+    networks:
+      - micro-upload-files
+  redis:
+    image: redis
+    container_name: micro-upload-files-redis
+    command: redis-server --requirepass 1234
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_PASSWORD=1234
+    networks:
+      - micro-upload-files
+  db-micro-upload-files:
+    image: mysql:8.0
+    container_name: db-micro-upload-files
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - ./.docker/mysql/dbdata:/var/lib/mysql
+    ports: 
+      - ${DB_PORT}:3306
+    networks:
+      - micro-upload-files
+networks:
+  micro-upload-files:
+    driver: bridge
