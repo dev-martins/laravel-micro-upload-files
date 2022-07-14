@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UploadVideoRequest;
 use App\Repositories\VideoRepository;
-use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 
 class UploadVideoController extends Controller
 {
@@ -22,6 +21,7 @@ class UploadVideoController extends Controller
 
     public function store(UploadVideoRequest $request)
     {
+        //spatie/laravel-cronless-schedule
         return $this->videoRepository->uploadVideo($request);
         // $formats = ['640x360', '960x540', '1280x720', '1920x1080'];
         #converte em um arquivo de audio

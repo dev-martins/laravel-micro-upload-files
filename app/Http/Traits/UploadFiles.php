@@ -23,6 +23,13 @@ trait UploadFiles
             return env('CLOUD_FRONT_PUBLIC') . $filePath .  $file_name;
     }
 
+    public function uploadFileConvert($file, $file_name, $folder = 'videos')
+    {
+        $filePath =  $folder . DIRECTORY_SEPARATOR;
+        if (Storage::disk('s3')->put($filePath . $file_name, (string) $file))
+            return  $filePath .  $file_name;
+    }
+
     public function uploadFile($request)
     {
         $file = $request->file($request->input('pathType'));
@@ -53,7 +60,7 @@ trait UploadFiles
     {
         $quality = 1;
         $png_quality = 9;
-        $folder = storage_path('app/public'); 
+        $folder = storage_path('app/public');
         $maxsize = 5245330;
 
         $image_compress = new Compress($file, $file->hashName(), $quality, $png_quality, $folder, $maxsize);

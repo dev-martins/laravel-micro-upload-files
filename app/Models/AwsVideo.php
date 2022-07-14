@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class AwsVideo extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['url','url_signed','thumbnail_url','duaration_in_seconds'];
 }
