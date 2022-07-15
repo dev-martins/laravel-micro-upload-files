@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "dev-martins/common-files-microservices": "dev-main",
         "eihror/compress-image": "^0.0.6",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",

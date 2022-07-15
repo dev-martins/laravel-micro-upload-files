@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "50baeb3ffc0f57b352555c313f737194",
+    "content-hash": "0a3c42ef5e32fa772a55da8221adfb74",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -419,6 +419,52 @@
                 }
             ],
             "time": "2020-11-06T11:48:09+00:00"
+        },
+        {
+            "name": "dev-martins/common-files-microservices",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dev-martins/common-files-microservices.git",
+                "reference": "cbb73cd392009b8fad009f21fc6f2e916e72e83a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dev-martins/common-files-microservices/zipball/cbb73cd392009b8fad009f21fc6f2e916e72e83a",
+                "reference": "cbb73cd392009b8fad009f21fc6f2e916e72e83a",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1 || ^8.0"
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DevMartins\\CommonFilesMicroservices\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Claudio Martins",
+                    "email": "claudio.dev.martins@gmail.com"
+                }
+            ],
+            "description": "Generates basic files for generating microservices",
+            "keywords": [
+                "common-files",
+                "microservice laravel",
+                "microservices"
+            ],
+            "support": {
+                "issues": "https://github.com/dev-martins/common-files-microservices/issues",
+                "source": "https://github.com/dev-martins/common-files-microservices/tree/main"
+            },
+            "time": "2022-07-03T23:10:35+00:00"
         },
         {
             "name": "dflydev/dot-access-data",
@@ -9143,7 +9189,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "dev-martins/common-files-microservices": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

@@ -8,6 +8,7 @@ use App\Models\OtherVideoFormat;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use ProtoneMedia\LaravelFFMpeg\Filters\WatermarkFactory;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 
 class VideoServiceFirst
@@ -31,6 +32,15 @@ class VideoServiceFirst
             ->inFormat(new \FFMpeg\Format\video\X264)
             ->resize(1280, 720)
             ->save('video-resize-12080x720.mp4');
+
+        FFMpeg::fromDisk('public')
+            ->open('video-resize-12080x720.mp4')
+            ->addWatermark(function (WatermarkFactory $watermark) {
+                $watermark->fromDisk('public')
+                    ->open('logo.png')
+                    ->right(25)
+                    ->bottom(25);
+            });
 
         $response = $this->uploadFileConvert(Storage::disk('public')
             ->get("video-resize-12080x720.mp4"), "video-resize-12080x720-" . Str::uuid() . ".mp4");

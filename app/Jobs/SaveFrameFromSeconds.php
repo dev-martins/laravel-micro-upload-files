@@ -43,14 +43,7 @@ class SaveFrameFromSeconds implements ShouldQueue
             ->export()
             ->toDisk('public')
             ->save("video-thumb-1920x1080.jpg");
-
-        // FFMpeg::openUrl($this->video->url_signed)
-        //     ->getFrameFromSeconds(2)
-        //     ->export()
-        //     ->toDisk('public')
-        //     ->inFormat(new \FFMpeg\Format\video\X264)
-        //     ->save("video-thumb-1920x1080.jpg");
-
+        
         $url_file = $this->uploadPublicFileCompress(Storage::disk('public')
             ->get("video-thumb-1920x1080.jpg"), "video-thumb-1920x1080-" . Str::uuid() . ".jpg");
         $this->removeImagePublicDisk("video-thumb-1920x1080.jpg");

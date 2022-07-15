@@ -12,6 +12,7 @@ use App\Jobs\SaveNewFormatThird;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
+use ProtoneMedia\LaravelFFMpeg\Filters\WatermarkFactory;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 
 class VideoRepository
@@ -65,12 +66,4 @@ class VideoRepository
         $this->removeImagePublicDisk("teste-${$dimensions}.jpg");
         $this->video->where('id', $videoId)->update(['thumbnail_url' => $url_file]);
     }
-
-
-    /**
-     * 1° - upload do video                     = OK
-     * 2° - upload da thumb do video principal  = OK
-     * 3° - upload do novo formato do video     = OK
-     * 4° - upload da thumb do video secundário = OK
-     */
 }
